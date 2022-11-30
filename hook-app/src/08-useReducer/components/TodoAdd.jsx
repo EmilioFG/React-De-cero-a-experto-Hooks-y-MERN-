@@ -1,19 +1,23 @@
+import { useForm } from "../../hooks";
 
 
 export const TodoAdd = ({ handleNewTodo }) => {
 
+  const { description, handleChange, handleReset } = useForm({
+    description: '',
+  })
 
   const handleSubmit = (e) => {
-    console.log('inputValue',e.prevent.default())
-    if (!inputValue)
+    e.preventDefault();
+    if (!description)
       return alert("Para agregar un nuevo todo, debe de agregar una descripción")
 
-    const todo = {
-      id: new Date().getTime * 7,
-      description: inputValue,
+    const newTodo = {
+      id: new Date().getTime() * 7,
+      description: description,
       done: false,
     };
-    handleNewTodo(todo);
+    handleNewTodo(newTodo);
   }
 
 
@@ -23,8 +27,10 @@ export const TodoAdd = ({ handleNewTodo }) => {
       {/* { id, description, done } */}
       <input
         type="text"
+        name="description"
         placeholder="Que hay que hacer ?"
         className="form-control"
+        onChange={handleChange}
       />
       <button
         type="submit"
