@@ -14,10 +14,11 @@ export const TodoAdd = ({ handleNewTodo }) => {
 
     const newTodo = {
       id: new Date().getTime() * 7,
-      description: description,
+      description,
       done: false,
     };
     handleNewTodo(newTodo);
+    handleReset();
   }
 
 
